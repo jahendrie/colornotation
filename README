@@ -1,0 +1,80 @@
+================================================================================
+    colornotation.py    |   version 1.01    |   zlib license    |   2014-08-14
+    James Hendrie       |   hendrie.james@gmail.com
+================================================================================
+
+TOC:
+    1.  What is this?
+    2.  Install / Uninstall
+    3.  How do I use it?
+    4.  Who made it?
+
+
+1.  What is this?
+
+    colornotation.py is a Python script to be used in conjunction with the
+    Android 'ColorNote' app.  It makes it easier to create ColorNote notes (HTML
+    files) on your computer, which you can then use within the app itself by
+    transferring the note to your phone (email, Dropbox, whatever).
+
+    If you prefer typing on a physical keyboard but still want the note with you
+    when you're out and about, here you go.  The sky's the limit, assuming of
+    course that your sky does not extend beyond the capabilities of a basic
+    note-taking Android app or this simple Python script.
+
+
+2.  Install / Uninstall
+
+    No installation.  Just a quick Python script that I wrote in a couple of
+    hours.  Mark it executable and stick it somewhere in your $PATH, or execute
+    it locally whenever the mood strikes you.
+
+
+3.  How do I use it?
+
+    ./colornotation.py [OPTIONS] [ITEMS]
+
+    ITEMS are arguments provided by you that will be added to the note.  If you
+    just want a quick note, enclose your text in quotes (i.e., "dog dead; throw
+    away blanket").  Typically, it's better to either pipe your input from stdin
+    or specify an infile to be parsed.
+
+    Options:
+        -h or --help:       Print help
+        --version:          Version and author info
+        -t or --title:      Specify the title of your note
+        -l or --list:       List format
+        -i or --input:      Select input file (default is STDIN)
+        -o or --output:     Select output file (default is STDOUT)
+        -s or --strip:      Strip a ColorNote note of its HTML.  This can also
+                            remove the checkboxes if used in tandem with the
+                            --list option.
+            
+    Examples:
+
+        ./colornotation -l -i shopping-list.txt -o shopping-list.html
+            Turn 'shopping-list.txt' into an HTML file that ColorNote can use
+            named shopping-list.html.
+
+        cat shopping-list.txt | ./colornotation --list -t "Shopping" > list.html
+            Same as above, except the list is titled "Shopping" and instead of
+            specifying input/output, input is piped into the script and
+            redirected to list.html.
+
+        ./colornotation article.txt > article.html
+            Create a note from an article.  I have no idea how large ColorNote
+            note files are allowed to be, so try not to get crazy with this sort
+            of thing.
+
+        cat note.html | ./colornotation -sl -o note.txt
+            Strip note.html (presumably sent to yourself from the ColorNote app)
+            of its HTML and list formatting, writing the resultant text to the
+            file note.txt
+
+        ./colornotation -sl --input=note.html --output=note.txt
+            Same as above, except using long-format input/output args.
+
+
+4.  Who made it?
+
+    James Hendrie (hendrie.james@gmail.com)
